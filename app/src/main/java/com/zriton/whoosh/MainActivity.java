@@ -1,5 +1,6 @@
 package com.zriton.whoosh;
 
+import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         recordButton= (FloatingActionButton) findViewById(R.id.record_button);
         pauseButton=(FloatingActionButton)findViewById(R.id.pause_button);
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i=new Intent(MainActivity.this,ProgressBarActivity.class);
+                startActivity(i);
+            }
+        });
 
         outputFile = android.os.Environment.getExternalStorageDirectory() + "/Recording/test_" + System.currentTimeMillis() + ".mp3";
         boolean exists = (new File(android.os.Environment.getExternalStorageDirectory()+"/Recording/")).exists();
